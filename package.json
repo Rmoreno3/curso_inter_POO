@@ -1,0 +1,11 @@
+{
+  "name": "curso_intermedio_poo",
+  "version": "1.0.0",
+  "description": "Curso intermedio de POO en JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Reynaldo Moreno <reynaldomoreno173@gmail.com>",
+  "license": "MIT"
+}
