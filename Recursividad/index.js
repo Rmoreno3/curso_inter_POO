@@ -1,29 +1,49 @@
-// Estructura de una funcion recursiva
+const objeto1 = {
+  a: "a",
+  b: "b",
+  c: {
+    d: "d",
+    e: "e",
+  },
+  editA() {
+    this.a = "AAAAA";
+  },
+};
 
-// function recursiva() {
-//   if (/*validacion*/) {
-//     // Llamados recursivos
-//   }  else {
-//     // Llamados normales, sin recursividad
-//   }
-// }
+function deepCopy(subject) {
+  let copySubject;
 
-// let numerito = 0;
-
-// for (let index = 0; index < numeritos.length; index++) {
-//   numerito = numeritos[index];
-//   console.log({ index, numerito });
-// }
-
-const numeritos = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-function recursiva(numbersArray) {
-  if (numbersArray.length !== 0) {
-    const firstNum = numbersArray[0];
-    console.log(firstNum);
-    numbersArray.shift();
-    console.log(numeritos);
-    recursiva(numbersArray);
+  function isObject() {
+    return typeof subject == "object";
   }
-}
 
-recursiva(numeritos);
+  function isArray() {
+    return Array.isArray(subject);
+  }
+  const subjectIsArray = isArray(subject);
+  const subjectIsObject = isObject(subject);
+
+  if (subjectIsArray) {
+    copySubject = [];
+  } else if (subjectIsObject) {
+    copySubject = {};
+  } else {
+    return subject;
+  }
+
+  for (key in subject) {
+    const keyIsObject = isObject(subject[key]);
+
+    if (keyIsObject) {
+      copySubject[key] = deepCopy(subject[key]);
+    } else {
+      if (subjectIsArray) {
+        copySubject.push(subject[key]);
+      } else {
+        copySubject[key] = subject[key];
+      }
+    }
+  }
+
+  return copySubject;
+}
