@@ -64,8 +64,11 @@ function createStudent({
   linkedin,
   instagram,
 } = {}) {
-  return {
-    name,
+  const private = {
+    _name: name,
+  };
+
+  const public = {
     email,
     age,
     approvedCourse,
@@ -75,7 +78,24 @@ function createStudent({
       linkedin,
       instagram,
     },
+    changeName(newName) {
+      this.name = newName;
+    },
+    readName() {
+      return private._name;
+    },
   };
+
+  Object.defineProperty(public, "readName", {
+    configurable: false,
+    writable: false,
+  });
+  Object.defineProperty(public, "changeName", {
+    configurable: false,
+    writable: false,
+  });
+
+  return public;
 }
 
 const Reynaldo = createStudent({
