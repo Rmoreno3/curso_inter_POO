@@ -78,12 +78,20 @@ function createStudent({
       linkedin,
       instagram,
     },
-    changeName(newName) {
-      this.name = newName;
-    },
-    readName() {
+    get name() {
       return private._name;
     },
+    set name(newName) {
+      newName.length !== 0
+        ? (private._name = newName)
+        : console.warn("Debes proporcionar un nombre valido");
+    },
+    // changeName(newName) {
+    //   this.name = newName;
+    // },
+    // readName() {
+    //   return private._name;
+    // },
   };
 
   Object.defineProperty(public, "readName", {
